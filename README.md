@@ -3,6 +3,7 @@
 This repo is a playground. I've read over the Eclipse plugin architecture and thought I'd give it a try in JS. This plugin arc only serves to extend existing capabilities, the only one so far being image processing. 
 
 ## File Tree
+`
 .
 ├── README.md
 ├── arc
@@ -26,6 +27,7 @@ This repo is a playground. I've read over the Eclipse plugin architecture and th
 ├── main.js
 ├── package-lock.json
 └── package.json
+`
 
 `main.js` defines a class that encapsulates a state variable and an event bus accesible to other components of the app. I was running into some issues when trying to update the state across startup phases, i.e. state not being updated synchronously. Upon further reading it seem using events we can ensure our `async` portions behave synchronously. Why would we want this? Some of the code used to read modules dynamically needs to be ran asynchronously. 
 
