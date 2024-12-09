@@ -26,15 +26,14 @@ class App {
       console.log("[*] starting express server");
       this.eventBus.emit("serverready");
     });
-
-    // cleanup...not sure how to do this
-    delete this.eventBus["stateinint"];
-    delete this.eventBus["stateinit:registercore"];
-    delete this.eventBus["stateinit:registercoreplugins"];
-    delete this.eventBus["stateinit:registerexternalplugins"];
   }
   start() {
     this.eventBus.on("serverready", () => {
+      // remove old events
+      delete this.eventBus["stateinint"];
+      delete this.eventBus["stateinit:registercore"];
+      delete this.eventBus["stateinit:registercoreplugins"];
+      delete this.eventBus["stateinit:registerexternalplugins"];
       this.server.listen(this);
     });
   }
