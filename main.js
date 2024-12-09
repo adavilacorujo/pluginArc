@@ -9,24 +9,29 @@ class App {
     this.eventBus = new EventBus();
     this.server = new Server();
   }
-  init() {
-    // const registerCore = new RegisterCore().init(this);
-    // this.loadCoreComponents();
-  }
   setup() {
     this.eventBus.on("stateinit", () => {
+      console.log("[*] loading core components");
       this.loadCoreComponents();
     });
     this.eventBus.on("stateinit:registercore", () => {
+      console.log("[*] loading core plugins");
       this.loadCorePlugins();
     });
     this.eventBus.on("stateinit:registercoreplugins", () => {
+      console.log("[*] loading external plugins");
       this.loadPlugins();
     });
     this.eventBus.on("stateinit:registerexternalplugins", () => {
-      console.log("registerd external plugins");
+      console.log("[*] starting express server");
       this.eventBus.emit("serverready");
     });
+
+    // cleanup...not sure how to do this
+    delete this.eventBus["stateinint"];
+    delete this.eventBus["stateinit:registercore"];
+    delete this.eventBus["stateinit:registercoreplugins"];
+    delete this.eventBus["stateinit:registerexternalplugins"];
   }
   start() {
     this.eventBus.on("serverready", () => {

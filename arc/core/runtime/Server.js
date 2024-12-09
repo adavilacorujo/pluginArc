@@ -49,7 +49,7 @@ class Server {
     this.acceptedImageFormats =
       app.sharedState.get("imageloader").acceptedImageFormats;
     this.app.listen(this.port, () => {
-      console.log(`server running on port ${this.port}`);
+      console.log(`[*] http server running on port ${this.port}`);
     });
   }
 }
